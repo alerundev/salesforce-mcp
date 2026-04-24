@@ -2,7 +2,7 @@
  * SK Chemicals Global Sales - Sample Data Seed Script
  * SK케미칼 글로벌 영업 샘플 데이터 시딩 (데모용)
  *
- * Objects: Account(40) + Contact(60) + Opportunity(200) + Lead(100) + Task(100) = 500개
+ * Objects: Account(50) + Contact(70) + Opportunity(240) + Lead(120) + Task(120) = 600개
  * Products: SKYGREEN, ECOZEN, ECOTRIA, SKYPET CR, SKYPURA, SKYPEL, SKYTRA, SKYBON,
  *           SKYDMT, SKYCHDM, SKYDMCD, SKYCHDA, ECOTRION, CnR
  *
@@ -53,8 +53,8 @@ async function seed() {
   console.log('🌱 SK Chemicals Global Sales - Data Seeding Start\n');
   const { token, base } = await getToken();
 
-  // ── 1. Accounts (40개) ───────────────────────────────────────────────────────
-  console.log('\n📦 Creating Accounts (40)...');
+  // ── 1. Accounts (50개) ───────────────────────────────────────────────────────
+  console.log('\n📦 Creating Accounts (50)...');
   const accountDefs = [
     // 화장품/뷰티 패키징 (0~7)
     { Name: "L'Oreal", Industry: 'Consumer Goods', AnnualRevenue: 38200000000, BillingCity: 'Paris', BillingCountry: 'France', NumberOfEmployees: 88000, Phone: '+33-1-4756-7000', Description: 'SKYGREEN/ECOZEN 화장품 용기 주요 고객. 친환경 패키징 전환 프로젝트 진행 중.' },
@@ -104,6 +104,17 @@ async function seed() {
     // 제약/정밀화학 (38~39)
     { Name: 'Evonik Industries', Industry: 'Chemical', AnnualRevenue: 15400000000, BillingCity: 'Essen', BillingCountry: 'Germany', NumberOfEmployees: 34000, Phone: '+49-201-177-01', Description: 'SKYDMCD/SKYCHDA 의약 중간체 원료 유럽 공급. 고순도 제약용 원료 품질 인증 진행 중.' },
     { Name: 'Lonza Group', Industry: 'Pharmaceutical', AnnualRevenue: 6700000000, BillingCity: 'Basel', BillingCountry: 'Switzerland', NumberOfEmployees: 16000, Phone: '+41-61-316-8111', Description: 'SKYDMCD 제약 중간체 원료 유럽 공급. FDA/EMA 규격 대응 고순도 원료 공급 파트너.' },
+    // 글로벌 균등 추가 (40~49)
+    { Name: 'Sun Pharmaceutical Industries', Industry: 'Pharmaceutical', AnnualRevenue: 4800000000, BillingCity: 'Mumbai', BillingCountry: 'India', NumberOfEmployees: 33000, Phone: '+91-22-4324-4324', Description: 'SKYDMCD/SKYCHDA 고순도 제약 중간체 인도 공급. 인도 최대 제약사, 글로벌 제네릭 의약품 시장 선도.' },
+    { Name: 'Dr. Reddy\'s Laboratories', Industry: 'Pharmaceutical', AnnualRevenue: 2700000000, BillingCity: 'Hyderabad', BillingCountry: 'India', NumberOfEmployees: 24000, Phone: '+91-40-4900-2900', Description: 'SKYCHDM/SKYDMT 원료의약품 인도 공급. FDA 승인 API 제조 전문 글로벌 제약사. 인도 CRAMS 시장 확대 협력.' },
+    { Name: 'Amcal Group', Industry: 'Consumer Goods', AnnualRevenue: 1200000000, BillingCity: 'Sydney', BillingCountry: 'Australia', NumberOfEmployees: 4500, Phone: '+61-2-9385-9000', Description: 'ECOZEN/SKYGREEN 호주 소비재 패키징 공급. 호주 친환경 포장재 전환 프로젝트 파트너. BPA-free 규정 대응.' },
+    { Name: 'CCL Industries', Industry: 'Manufacturing', AnnualRevenue: 5300000000, BillingCity: 'Toronto', BillingCountry: 'Canada', NumberOfEmployees: 22000, Phone: '+1-416-756-8500', Description: 'SKYGREEN/ECOTRIA CR 라벨·패키징 솔루션 캐나다 공급. 글로벌 특수 패키징 전문, 재활용 소재 전환 가속화.' },
+    { Name: 'Flex Ltd', Industry: 'Electronics', AnnualRevenue: 26000000000, BillingCity: 'Singapore', BillingCountry: 'Singapore', NumberOfEmployees: 170000, Phone: '+65-6890-7188', Description: 'SKYPURA/SKYTRA 전자부품 내열 소재 싱가포르 공급. 글로벌 EMS 기업, 아시아-태평양 생산 허브 소재 조달.' },
+    { Name: 'WEG SA', Industry: 'Manufacturing', AnnualRevenue: 5100000000, BillingCity: 'Jaragua do Sul', BillingCountry: 'Brazil', NumberOfEmployees: 41000, Phone: '+55-47-3276-4000', Description: 'SKYTRA/SKYPEL 전동기·발전기 전기 부품 브라질 공급. 남미 최대 전기기기 제조사, 재생에너지 설비 소재 수요 확대.' },
+    { Name: 'Arçelik AS', Industry: 'Electronics', AnnualRevenue: 8700000000, BillingCity: 'Istanbul', BillingCountry: 'Turkey', NumberOfEmployees: 40000, Phone: '+90-212-314-3434', Description: 'SKYBON/SKYPURA 가전 강판 코팅·내열 부품 터키 공급. 유럽·중동·아프리카 가전 브랜드(Beko, Grundig) 친환경 소재 전환.' },
+    { Name: 'Synthos SA', Industry: 'Chemical', AnnualRevenue: 1900000000, BillingCity: 'Oswiecim', BillingCountry: 'Poland', NumberOfEmployees: 4800, Phone: '+48-33-844-1000', Description: 'SKYDMT/SKYCHDM 폴리에스터 원료 폴란드 공급. 동유럽 최대 합성고무·폴리에스터 전문 화학사, 원료 다변화 협력.' },
+    { Name: 'Nouryon AB', Industry: 'Chemical', AnnualRevenue: 5500000000, BillingCity: 'Gothenburg', BillingCountry: 'Sweden', NumberOfEmployees: 10000, Phone: '+46-31-60-01-00', Description: 'SKYCHDA/SKYDMCD 특수 화학 원료 스웨덴 공급. 퍼옥사이드·서피스케미스트리 전문 글로벌 특수화학사.' },
+    { Name: 'Intercos Group', Industry: 'Consumer Goods', AnnualRevenue: 900000000, BillingCity: 'Milan', BillingCountry: 'Italy', NumberOfEmployees: 7000, Phone: '+39-031-64-641', Description: 'ECOTRIA CLARO/SKYGREEN 화장품 OEM 용기 소재 이탈리아 공급. 글로벌 럭셔리·매스 화장품 제조 파트너, 친환경 패키징 선도.' },
   ];
 
   const accountIds: string[] = [];
@@ -114,8 +125,8 @@ async function seed() {
     await sleep(50);
   }
 
-  // ── 2. Contacts (60개) ───────────────────────────────────────────────────────
-  console.log('\n👤 Creating Contacts (60)...');
+  // ── 2. Contacts (70개) ───────────────────────────────────────────────────────
+  console.log('\n👤 Creating Contacts (70)...');
   const contactDefs = [
     // L'Oreal (0) - 2명
     { FirstName: 'Sophie', LastName: 'Martin', Email: 's.martin@loreal.com', Phone: '+33-1-4756-7101', Title: 'VP Sustainable Packaging', AccountId: accountIds[0] },
@@ -208,6 +219,17 @@ async function seed() {
     { FirstName: 'Lukas', LastName: 'Schneider', Email: 'l.schneider@evonik.com', Phone: '+49-201-177-3801', Title: 'Fine Chemicals Raw Material Lead', AccountId: accountIds[38] },
     // Lonza Group (39) - 1명
     { FirstName: 'Marc', LastName: 'Zimmermann', Email: 'm.zimmermann@lonza.com', Phone: '+41-61-316-8211', Title: 'API Raw Material Procurement Manager', AccountId: accountIds[39] },
+    // 글로벌 균등 추가 Account (40~49) - 각 1명
+    { FirstName: 'Vikram', LastName: 'Mehta', Email: 'v.mehta@sunpharma.com', Phone: '+91-22-4324-4401', Title: 'API Raw Material Procurement Director', AccountId: accountIds[40] },
+    { FirstName: 'Preethi', LastName: 'Reddy', Email: 'p.reddy@drreddys.com', Phone: '+91-40-4900-2901', Title: 'Chemical Sourcing Manager', AccountId: accountIds[41] },
+    { FirstName: 'Lachlan', LastName: 'Murray', Email: 'l.murray@amcal.com.au', Phone: '+61-2-9385-9101', Title: 'Sustainable Packaging Manager', AccountId: accountIds[42] },
+    { FirstName: 'Patricia', LastName: 'Nguyen', Email: 'p.nguyen@cclind.com', Phone: '+1-416-756-8601', Title: 'Material Innovation Director', AccountId: accountIds[43] },
+    { FirstName: 'Wei', LastName: 'Tan', Email: 'w.tan@flex.com', Phone: '+65-6890-7288', Title: 'Component Material Sourcing Lead', AccountId: accountIds[44] },
+    { FirstName: 'Fernanda', LastName: 'Costa', Email: 'f.costa@weg.net', Phone: '+55-47-3276-4101', Title: 'Electrical Material Procurement Manager', AccountId: accountIds[45] },
+    { FirstName: 'Murat', LastName: 'Yilmaz', Email: 'm.yilmaz@arcelik.com', Phone: '+90-212-314-3501', Title: 'Home Appliance Material Sourcing Director', AccountId: accountIds[46] },
+    { FirstName: 'Agnieszka', LastName: 'Kowalczyk', Email: 'a.kowalczyk@synthos.com', Phone: '+48-33-844-1101', Title: 'Polymer Raw Material Manager', AccountId: accountIds[47] },
+    { FirstName: 'Bjorn', LastName: 'Lindstrom', Email: 'b.lindstrom@nouryon.com', Phone: '+46-31-60-01-01', Title: 'Specialty Chemical Procurement Lead', AccountId: accountIds[48] },
+    { FirstName: 'Giulia', LastName: 'Ferrari', Email: 'g.ferrari@intercos.com', Phone: '+39-031-64-641-01', Title: 'Sustainable Packaging Director', AccountId: accountIds[49] },
   ];
 
   for (const c of contactDefs) {
@@ -216,8 +238,8 @@ async function seed() {
     await sleep(50);
   }
 
-  // ── 3. Opportunities (200개) ─────────────────────────────────────────────────
-  console.log('\n💰 Creating Opportunities (200)...');
+  // ── 3. Opportunities (240개) ─────────────────────────────────────────────────
+  console.log('\n💰 Creating Opportunities (240)...');
 
   const oppDefs: Array<{Name:string;StageName:string;Amount:number;CloseDate:string;AccountId:string;Probability:number;Description:string}> = [
     // ── SKYGREEN (20건) ──
@@ -432,6 +454,57 @@ async function seed() {
     { Name: '[SKYCHDA] Evonik Industries 아시아 공장 공급', StageName: 'Value Proposition', Amount: 2900000000, CloseDate: '2026-07-25', AccountId: accountIds[38]!, Probability: 45, Description: 'SKYCHDA 아시아 정밀화학 시장 확대. 연간 예상 수요: 740톤. 싱가포르/한국 생산 기지 직납.' },
     { Name: '[SKYCHDA] Sherwin-Williams 건설 인프라 코팅', StageName: 'Needs Analysis', Amount: 3100000000, CloseDate: '2026-08-10', AccountId: accountIds[33]!, Probability: 35, Description: 'SKYCHDA 건설/인프라 고성능 코팅 원료. 연간 예상 수요: 790톤. 교량/철도 구조물 내식성 코팅 원료.' },
     { Name: '[SKYCHDA] Lonza Group 바이오 원료 신규 적용', StageName: 'Prospecting', Amount: 4500000000, CloseDate: '2026-12-05', AccountId: accountIds[39]!, Probability: 10, Description: 'SKYCHDA 바이오 의약품 원료 신규 적용. 연간 예상 수요: 1150톤. 바이오 의약 파이프라인 원료 초기 탐색.' },
+    // ── 글로벌 균등 추가 Opportunities (40개) ──
+    // Sun Pharmaceutical (40) — SKYDMCD/SKYCHDA
+    { Name: '[SKYDMCD] Sun Pharma 인도 제약 원료 장기공급 계약', StageName: 'Closed Won', Amount: 5200000000, CloseDate: '2025-09-10', AccountId: accountIds[40]!, Probability: 100, Description: 'SKYDMCD 고순도 제약 중간체 인도 공급. 연간 예상 수요: 1380톤. FDA 승인 인도 공장 직납, 5년 장기 계약 체결.' },
+    { Name: '[SKYCHDA] Sun Pharma 원료의약품 API 공급 확대', StageName: 'Negotiation/Review', Amount: 3800000000, CloseDate: '2026-04-20', AccountId: accountIds[40]!, Probability: 80, Description: 'SKYCHDA 원료의약품 중간체 공급 확대. 연간 예상 수요: 970톤. 인도 제약 수출 성장에 따른 물량 확대 협의.' },
+    { Name: '[SKYCHDM] Sun Pharma 코폴리에스터 원료 신규 적용', StageName: 'Proposal/Price Quote', Amount: 2100000000, CloseDate: '2026-07-15', AccountId: accountIds[40]!, Probability: 60, Description: 'SKYCHDM 고순도 CHDM 기반 코폴리에스터 원료 인도 신규 공급. 연간 예상 수요: 540톤. 인도 의약 포장 소재 전환.' },
+    { Name: '[ECOZEN] Sun Pharma 의약품 용기 BPA-free 전환', StageName: 'Id. Decision Makers', Amount: 1400000000, CloseDate: '2026-09-30', AccountId: accountIds[40]!, Probability: 50, Description: 'ECOZEN 의약품 용기 BPA-free 소재 전환. 연간 예상 수요: 168톤. 미국·유럽 수출용 의약품 포장 규정 대응.' },
+    // Dr. Reddy's (41) — SKYCHDM/SKYDMT
+    { Name: "[SKYCHDM] Dr. Reddy's API 중간체 원료 인도 공급", StageName: 'Closed Won', Amount: 2900000000, CloseDate: '2025-11-05', AccountId: accountIds[41]!, Probability: 100, Description: 'SKYCHDM 원료의약품 중간체 공급. 연간 예상 수요: 740톤. 인도 CRAMS 시장 글로벌 제약사 납품 체인 연계.' },
+    { Name: "[SKYDMT] Dr. Reddy's 폴리에스터 원료 신규 탐색", StageName: 'Needs Analysis', Amount: 1800000000, CloseDate: '2026-08-10', AccountId: accountIds[41]!, Probability: 35, Description: 'SKYDMT 인도 제약·화학 원료 공급 탐색. 연간 예상 수요: 460톤. Dr. Reddy\'s 원료 다변화 전략 연계.' },
+    { Name: "[ECOTRIA CR] Dr. Reddy's 의약품 포장 친환경 전환", StageName: 'Qualification', Amount: 1100000000, CloseDate: '2026-10-20', AccountId: accountIds[41]!, Probability: 25, Description: 'ECOTRIA CR 의약품 블리스터 포장 친환경 소재. 연간 예상 수요: 132톤. EU 수출용 친환경 포장 전환 검토.' },
+    { Name: "[SKYDMCD] Dr. Reddy's 고순도 화학 원료 협력", StageName: 'Prospecting', Amount: 2400000000, CloseDate: '2026-12-15', AccountId: accountIds[41]!, Probability: 10, Description: 'SKYDMCD 정밀화학 원료 인도 공급 탐색. 연간 예상 수요: 610톤. API 합성용 고순도 원료 초기 검토.' },
+    // Amcal Group (42) — ECOZEN/SKYGREEN
+    { Name: '[ECOZEN] Amcal Group 호주 소비재 용기 BPA-free 전환', StageName: 'Closed Won', Amount: 980000000, CloseDate: '2025-10-15', AccountId: accountIds[42]!, Probability: 100, Description: 'ECOZEN 호주 소비재 패키징 BPA-free 전환. 연간 예상 수요: 118톤. 호주 식품안전규정 대응, 3년 공급 계약.' },
+    { Name: '[SKYGREEN] Amcal Group 친환경 건강용품 용기 채택', StageName: 'Proposal/Price Quote', Amount: 650000000, CloseDate: '2026-05-10', AccountId: accountIds[42]!, Probability: 60, Description: 'SKYGREEN 건강기능식품 용기 호주 공급. 연간 예상 수요: 78톤. 투명·BPA-free 소재 친환경 포지셔닝.' },
+    { Name: '[ECOTRIA CR] Amcal Group 재활용 소재 패키징 전환', StageName: 'Needs Analysis', Amount: 750000000, CloseDate: '2026-09-25', AccountId: accountIds[42]!, Probability: 35, Description: 'ECOTRIA CR 화학재활용 소재 호주 공급. 연간 예상 수요: 90톤. 호주 National Packaging Targets 2025 대응.' },
+    { Name: '[ECOZEN] Amcal Group 의약·건강 용기 라인 확대', StageName: 'Id. Decision Makers', Amount: 820000000, CloseDate: '2026-11-30', AccountId: accountIds[42]!, Probability: 50, Description: 'ECOZEN 의약품 용기 라인 확대. 연간 예상 수요: 99톤. 기존 소비재 납품 실적 기반 의약품 용기 확장.' },
+    // CCL Industries (43) — SKYGREEN/ECOTRIA CR
+    { Name: '[SKYGREEN] CCL Industries 캐나다 특수 라벨 소재 채택', StageName: 'Closed Won', Amount: 1350000000, CloseDate: '2025-08-20', AccountId: accountIds[43]!, Probability: 100, Description: 'SKYGREEN 특수 라벨·패키징 소재 캐나다 공급. 연간 예상 수요: 162톤. 캐나다 소비재 친환경 라벨 소재 전환.' },
+    { Name: '[ECOTRIA CR] CCL Industries 재활용 라벨 소재 글로벌 확대', StageName: 'Negotiation/Review', Amount: 2200000000, CloseDate: '2026-03-10', AccountId: accountIds[43]!, Probability: 80, Description: 'ECOTRIA CR 재활용 라벨 소재 글로벌 공급. 연간 예상 수요: 264톤. CCL 글로벌 22개국 공장 납품 체계 구축.' },
+    { Name: '[ECOZEN] CCL Industries 식품 포장 라벨 BPA-free 전환', StageName: 'Value Proposition', Amount: 900000000, CloseDate: '2026-06-20', AccountId: accountIds[43]!, Probability: 45, Description: 'ECOZEN 식품 포장 라벨 소재 전환. 연간 예상 수요: 108톤. 식품접촉 BPA-free 규정 대응 소재 전환.' },
+    { Name: '[ECOTRIA CLARO] CCL Industries 음료 라벨 순환경제 소재', StageName: 'Prospecting', Amount: 1600000000, CloseDate: '2026-12-01', AccountId: accountIds[43]!, Probability: 10, Description: 'ECOTRIA CLARO 음료병 라벨 순환경제 소재. 연간 예상 수요: 192톤. 단일 소재 재활용 용이성 확보 전략.' },
+    // Flex Ltd (44) — SKYPURA/SKYTRA
+    { Name: '[SKYPURA] Flex Ltd 싱가포르 전자부품 내열 소재 채택', StageName: 'Closed Won', Amount: 3100000000, CloseDate: '2025-12-05', AccountId: accountIds[44]!, Probability: 100, Description: 'SKYPURA 전자부품 내열 플라스틱 아시아 공급. 연간 예상 수요: 175톤. 싱가포르 허브 기반 글로벌 EMS 공급망 연계.' },
+    { Name: '[SKYTRA] Flex Ltd EV 충전 모듈 내열 부품 공급', StageName: 'Proposal/Price Quote', Amount: 2400000000, CloseDate: '2026-05-30', AccountId: accountIds[44]!, Probability: 60, Description: 'SKYTRA EV 충전 모듈 고온 부품 소재. 연간 예상 수요: 162톤. 아시아 EV 충전 인프라 확장 수요 대응.' },
+    { Name: '[SKYPEL] Flex Ltd 서버·통신 케이블 소재 채택', StageName: 'Id. Decision Makers', Amount: 1900000000, CloseDate: '2026-08-15', AccountId: accountIds[44]!, Probability: 50, Description: 'SKYPEL 데이터센터·5G 케이블 소재 싱가포르 공급. 연간 예상 수요: 154톤. AI 인프라 확장 수요 급증 대응.' },
+    { Name: '[SKYPURA] Flex Ltd 의료기기 부품 소재 확대', StageName: 'Needs Analysis', Amount: 1500000000, CloseDate: '2026-10-25', AccountId: accountIds[44]!, Probability: 35, Description: 'SKYPURA 의료기기 내열 부품 공급 확대. 연간 예상 수요: 85톤. 싱가포르 의료기기 클러스터 내 확대 납품.' },
+    // WEG SA (45) — SKYTRA/SKYPEL
+    { Name: '[SKYTRA] WEG SA 전동기 인슐레이터 브라질 공급', StageName: 'Closed Won', Amount: 2600000000, CloseDate: '2025-07-25', AccountId: accountIds[45]!, Probability: 100, Description: 'SKYTRA 전동기 보빈·인슐레이터 남미 공급. 연간 예상 수요: 176톤. WEG 글로벌 전동기 생산 기반 남미 독점 공급.' },
+    { Name: '[SKYPEL] WEG SA 발전기 케이블 피복 소재 채택', StageName: 'Negotiation/Review', Amount: 1800000000, CloseDate: '2026-04-05', AccountId: accountIds[45]!, Probability: 80, Description: 'SKYPEL 발전기·산업용 케이블 소재 브라질 공급. 연간 예상 수요: 146톤. 남미 재생에너지 프로젝트 수요 확대.' },
+    { Name: '[SKYTRA] WEG SA 태양광 인버터 부품 납품 확대', StageName: 'Value Proposition', Amount: 1400000000, CloseDate: '2026-07-20', AccountId: accountIds[45]!, Probability: 45, Description: 'SKYTRA 태양광 인버터 전기 부품 확대. 연간 예상 수요: 95톤. 브라질 태양광 설치 급증에 따른 수요 증가.' },
+    { Name: '[SKYPEL] WEG SA 풍력발전 케이블 소재 탐색', StageName: 'Prospecting', Amount: 2100000000, CloseDate: '2026-11-10', AccountId: accountIds[45]!, Probability: 10, Description: 'SKYPEL 풍력발전기 케이블 피복 소재 탐색. 연간 예상 수요: 170톤. 브라질 해상풍력 개발 계획 연계 초기 검토.' },
+    // Arçelik AS (46) — SKYBON/SKYPURA
+    { Name: '[SKYBON] Arçelik 터키 가전 강판 코팅 수지 장기 공급', StageName: 'Closed Won', Amount: 4500000000, CloseDate: '2025-06-15', AccountId: accountIds[46]!, Probability: 100, Description: 'SKYBON 가전 강판 코팅 수지 터키 공급. 연간 예상 수요: 450톤. Beko/Grundig 브랜드 생산라인 적용, 3년 계약.' },
+    { Name: '[SKYPURA] Arçelik 고내열 가전 부품 소재 채택', StageName: 'Proposal/Price Quote', Amount: 1900000000, CloseDate: '2026-05-25', AccountId: accountIds[46]!, Probability: 60, Description: 'SKYPURA 가전 고온부 플라스틱 부품 터키 공급. 연간 예상 수요: 107톤. 에어컨·냉장고 압축기 주변 내열 부품.' },
+    { Name: '[SKYBON] Arçelik 유럽·중동·아프리카 공급망 확대', StageName: 'Id. Decision Makers', Amount: 3200000000, CloseDate: '2026-08-30', AccountId: accountIds[46]!, Probability: 50, Description: 'SKYBON 터키발 EMEA 공급망 확대. 연간 예상 수요: 320톤. 터키 생산 허브 활용 유럽 납품 체계 구축.' },
+    { Name: '[ECOZEN] Arçelik 친환경 가전 소재 도입 검토', StageName: 'Qualification', Amount: 800000000, CloseDate: '2026-10-15', AccountId: accountIds[46]!, Probability: 25, Description: 'ECOZEN 가전 외장·투명 부품 친환경 소재 검토. 연간 예상 수요: 64톤. EU 생태설계 규정 대응 소재 탐색.' },
+    // Synthos SA (47) — SKYDMT/SKYCHDM
+    { Name: '[SKYDMT] Synthos SA 동유럽 폴리에스터 원료 공급', StageName: 'Closed Won', Amount: 3600000000, CloseDate: '2025-10-01', AccountId: accountIds[47]!, Probability: 100, Description: 'SKYDMT 폴리에스터 원료 폴란드 공급. 연간 예상 수요: 2000톤. 동유럽 폴리에스터 시장 진출 첫 대형 계약.' },
+    { Name: '[SKYCHDM] Synthos SA 코폴리에스터 원료 신규 채택', StageName: 'Negotiation/Review', Amount: 2400000000, CloseDate: '2026-04-15', AccountId: accountIds[47]!, Probability: 80, Description: 'SKYCHDM CHDM 원료 동유럽 공급. 연간 예상 수요: 820톤. 코폴리에스터 제품 라인 신규 개발 원료 공급.' },
+    { Name: '[SKYDMT] Synthos SA 2026년 물량 확대 재계약', StageName: 'Value Proposition', Amount: 4200000000, CloseDate: '2026-09-10', AccountId: accountIds[47]!, Probability: 45, Description: 'SKYDMT 물량 15% 확대 재계약 협의. 연간 예상 수요: 2300톤. 동유럽 폴리에스터 수요 증가 대응.' },
+    { Name: '[SKYCHDM] Synthos SA 코팅 수지 원료 확대', StageName: 'Prospecting', Amount: 1600000000, CloseDate: '2026-12-20', AccountId: accountIds[47]!, Probability: 10, Description: 'SKYCHDM 코팅 수지 원료 동유럽 신규 공급. 연간 예상 수요: 548톤. 폴란드 코팅 산업 성장 연계 초기 탐색.' },
+    // Nouryon AB (48) — SKYCHDA/SKYDMCD
+    { Name: '[SKYCHDA] Nouryon AB 스웨덴 특수 코팅 원료 장기 공급', StageName: 'Closed Won', Amount: 3900000000, CloseDate: '2025-09-20', AccountId: accountIds[48]!, Probability: 100, Description: 'SKYCHDA 특수 코팅 폴리에스터 수지 원료 스웨덴 공급. 연간 예상 수요: 995톤. 북유럽 친환경 코팅 시장 선도 파트너.' },
+    { Name: '[SKYDMCD] Nouryon AB 고순도 정밀화학 원료 채택', StageName: 'Negotiation/Review', Amount: 2700000000, CloseDate: '2026-03-25', AccountId: accountIds[48]!, Probability: 80, Description: 'SKYDMCD 특수화학 원료 스웨덴 공급. 연간 예상 수요: 718톤. Nouryon 퍼옥사이드 제조 연계 특수 원료 채택.' },
+    { Name: '[SKYCHDA] Nouryon AB 유럽 코팅 시장 공급 확대', StageName: 'Id. Decision Makers', Amount: 2200000000, CloseDate: '2026-07-05', AccountId: accountIds[48]!, Probability: 50, Description: 'SKYCHDA 유럽 코팅 원료 공급 확대. 연간 예상 수요: 562톤. Nouryon 서피스케미스트리 사업 원료 확대.' },
+    { Name: '[SKYDMCD] Nouryon AB 아시아 공장 원료 공급 탐색', StageName: 'Qualification', Amount: 1800000000, CloseDate: '2026-11-20', AccountId: accountIds[48]!, Probability: 25, Description: 'SKYDMCD 아시아 생산 기지 원료 공급. 연간 예상 수요: 479톤. 싱가포르·한국 Nouryon 공장 직납 검토.' },
+    // Intercos Group (49) — ECOTRIA CLARO/SKYGREEN
+    { Name: '[ECOTRIA CLARO] Intercos Group 이탈리아 화장품 OEM 용기 전환', StageName: 'Closed Won', Amount: 1600000000, CloseDate: '2025-11-25', AccountId: accountIds[49]!, Probability: 100, Description: 'ECOTRIA CLARO 화장품 OEM 용기 이탈리아 공급. 연간 예상 수요: 192톤. 글로벌 럭셔리·매스 브랜드 친환경 용기 납품.' },
+    { Name: '[SKYGREEN] Intercos Group 프리미엄 용기 소재 채택', StageName: 'Negotiation/Review', Amount: 1200000000, CloseDate: '2026-04-30', AccountId: accountIds[49]!, Probability: 80, Description: 'SKYGREEN 프리미엄 화장품 용기 소재 채택. 연간 예상 수요: 144톤. 럭셔리 고투명 용기 소재 전환 협의.' },
+    { Name: '[ECOTRIA CR] Intercos Group 화학재활용 화장품 용기 전환', StageName: 'Value Proposition', Amount: 900000000, CloseDate: '2026-07-15', AccountId: accountIds[49]!, Probability: 45, Description: 'ECOTRIA CR 화장품 OEM 화학재활용 소재 전환. 연간 예상 수요: 108톤. EU SUP 규제 대응 재활용 소재 전환.' },
+    { Name: '[ECOZEN] Intercos Group 바이오매스 화장품 용기 도입', StageName: 'Prospecting', Amount: 750000000, CloseDate: '2026-12-10', AccountId: accountIds[49]!, Probability: 10, Description: 'ECOZEN 바이오매스 화장품 용기 소재 도입 탐색. 연간 예상 수요: 90톤. 이탈리아 럭셔리 브랜드 바이오 소재 초기 검토.' },
   ];
 
   let oppCount = 0;
@@ -443,8 +516,8 @@ async function seed() {
   }
   console.log(`  ✅ 총 Opportunities ${oppCount}건 생성 완료`);
 
-  // ── 4. Leads (100개) ─────────────────────────────────────────────────────────
-  console.log('\n🎯 Creating Leads (100)...');
+  // ── 4. Leads (120개) ─────────────────────────────────────────────────────────
+  console.log('\n🎯 Creating Leads (120)...');
   const leadDefs = [
     // 유럽 (30개)
     { FirstName: 'Oliver', LastName: 'Schmidt', Company: 'Henkel AG', Email: 'o.schmidt@henkel.com', Title: 'Sustainable Packaging Lead', Status: 'Working - Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'Germany', Phone: '+49-211-797-0', Description: 'ECOTRIA CR 세탁세제 용기 친환경 전환 문의. Henkel 2030 플라스틱 전략 연계.' },
@@ -551,6 +624,30 @@ async function seed() {
     { FirstName: 'Camila', LastName: 'Rodriguez', Company: 'Petrobras Distribuidora', Email: 'c.rodriguez2@petrobras.com', Title: 'Specialty Material Procurement', Status: 'Open - Not Contacted', LeadSource: 'Web', Rating: 'Warm', Country: 'Brazil', Phone: '+55-21-3224-1510', Description: 'SKYBON 브라질 코팅 수지 시장 공급 탐색. 남미 도료/코팅 시장 진출 검토.' },
     { FirstName: 'Javier', LastName: 'Morales', Company: 'Pemex Petrochemicals', Email: 'j.morales@pemex.com', Title: 'Chemical Feedstock Manager', Status: 'Open - Not Contacted', LeadSource: 'Cold Call', Rating: 'Cold', Country: 'Mexico', Phone: '+52-55-1944-2500', Description: 'SKYDMT 멕시코 석유화학 원료 공급 탐색. 중남미 폴리에스터 시장 초기 검토.' },
     { FirstName: 'Suleiman', LastName: 'Oduya', Company: 'Dangote Industries', Email: 's.oduya@dangote.com', Title: 'Chemical Procurement Director', Status: 'Working - Contacted', LeadSource: 'Conference', Rating: 'Warm', Phone: '+234-1-448-8000', Description: 'SKYDMT 나이지리아 폴리에스터 원료 공급 문의. 아프리카 최대 산업그룹 원료 공급망 구축.' },
+    // ── 글로벌 균등 추가 Leads (20개) ──
+    // 아시아태평양 (10개)
+    { FirstName: 'Aditya', LastName: 'Birla', Company: 'Grasim Industries', Email: 'a.birla@grasim.com', Title: 'Chemical Procurement Director', Status: 'Working - Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'India', Phone: '+91-22-6652-5000', Description: 'SKYDMT/SKYCHDM 인도 섬유·화학 원료 공급 문의. Aditya Birla Group 폴리에스터 사업 확대 연계.' },
+    { FirstName: 'Neha', LastName: 'Gupta', Company: 'Pidilite Industries', Email: 'n.gupta@pidilite.com', Title: 'Specialty Adhesive Material Lead', Status: 'Open - Not Contacted', LeadSource: 'Web', Rating: 'Warm', Country: 'India', Phone: '+91-22-6689-4800', Description: 'SKYBON/SKYCHDA 접착제·코팅 원료 문의. 인도 건설·산업용 접착제 시장 친환경 소재 전환 탐색.' },
+    { FirstName: 'Xin', LastName: 'Liu', Company: 'Huawei Technologies', Email: 'x.liu@huawei.com', Title: '绿色材料采购总监', Status: 'Working - Contacted', LeadSource: 'Conference', Rating: 'Hot', Country: 'China', Phone: '+86-755-2878-0808', Description: 'SKYPURA/SKYTRA 통신장비 내열 부품 소재 문의. 화웨이 그린 ICT 전략 연계 친환경 소재 전환.' },
+    { FirstName: 'Mei', LastName: 'Zhang', Company: 'Alibaba Group', Email: 'm.zhang@alibaba-inc.com', Title: '可持续供应链负责人', Status: 'Open - Not Contacted', LeadSource: 'LinkedIn', Rating: 'Warm', Country: 'China', Phone: '+86-571-8502-2088', Description: 'ECOTRIA CR/SKYGREEN 전자상거래 포장 친환경 소재 문의. 알리바바 탄소중립 2030 전략 연계.' },
+    { FirstName: 'Tanaka', LastName: 'Hiroshi', Company: 'Daikin Industries', Email: 'h.tanaka@daikin.com', Title: '冷媒・材料調達部長', Status: 'Working - Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'Japan', Phone: '+81-6-6373-4352', Description: 'SKYPURA/ECOZEN 에어컨 내열 부품·용기 소재 문의. Daikin 글로벌 생산 허브 친환경 소재 전환.' },
+    { FirstName: 'Seo', LastName: 'Jiyeon', Company: 'CJ CheilJedang', Email: 'jy.seo@cj.net', Title: '식품 포장재 친환경 소재 담당', Status: 'Open - Not Contacted', LeadSource: 'Conference', Rating: 'Warm', Country: 'South Korea', Phone: '+82-2-6740-1114', Description: 'ECOTRIA CLARO/ECOZEN 식품 포장 친환경 소재 문의. CJ 푸드 사업 친환경 패키징 전환 전략 연계.' },
+    { FirstName: 'Rizal', LastName: 'Ahmad', Company: 'Petronas Chemicals', Email: 'r.ahmad@petronaschemicals.com', Title: 'Specialty Chemical Sourcing Lead', Status: 'Working - Contacted', LeadSource: 'Partner Referral', Rating: 'Hot', Country: 'Malaysia', Phone: '+60-3-2051-5000', Description: 'SKYDMT/SKYCHDM 말레이시아 석유화학 원료 공급 문의. Petronas 코폴리에스터 사업 원료 파트너십 탐색.' },
+    { FirstName: 'Wirawan', LastName: 'Pramono', Company: 'PT Sinar Mas', Email: 'w.pramono@sinarmas.com', Title: 'Sustainable Packaging Director', Status: 'Open - Not Contacted', LeadSource: 'Web', Rating: 'Warm', Country: 'Indonesia', Phone: '+62-21-5088-8000', Description: 'ECOZEN/SKYGREEN 인도네시아 소비재 포장 친환경 소재 문의. Sinar Mas 친환경 전략 연계.' },
+    { FirstName: 'Chaiyaporn', LastName: 'Siripong', Company: 'PTT Global Chemical', Email: 'c.siripong@pttgcgroup.com', Title: 'Polymer Raw Material Director', Status: 'Working - Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'Thailand', Phone: '+66-2-140-9000', Description: 'SKYDMT/SKYCHDM 태국 석유화학 원료 공급 협력 문의. PTT GC 코폴리에스터 사업 확대 연계.' },
+    { FirstName: 'Lim', LastName: 'Boon Keng', Company: 'Wilmar International', Email: 'bk.lim@wilmar-intl.com', Title: 'Bio-based Material Innovation Lead', Status: 'Open - Not Contacted', LeadSource: 'Conference', Rating: 'Warm', Country: 'Singapore', Phone: '+65-6216-0244', Description: 'ECOTRION 바이오 기반 모노머 협력 문의. Wilmar 팜유 기반 바이오화학 사업 연계 소재 파트너십 탐색.' },
+    // 중동/아프리카 (5개)
+    { FirstName: 'Nasser', LastName: 'Al-Otaibi', Company: 'Saudi Aramco', Email: 'n.alotaibi@aramco.com', Title: 'Chemical Raw Material Strategy Lead', Status: 'Working - Contacted', LeadSource: 'Conference', Rating: 'Hot', Country: 'Saudi Arabia', Phone: '+966-13-872-0115', Description: 'SKYDMT/SKYCHDM 사우디 석유화학 원료 공급 전략 문의. Saudi Aramco 다운스트림 화학 사업 원료 다변화.' },
+    { FirstName: 'Hassan', LastName: 'Al-Hammadi', Company: 'ADNOC Distribution', Email: 'h.alhammadi@adnoc.ae', Title: 'Petrochemical Sourcing Manager', Status: 'Open - Not Contacted', LeadSource: 'Web', Rating: 'Warm', Country: 'United Arab Emirates', Phone: '+971-2-602-0000', Description: 'SKYDMT/SKYBON UAE 석유화학·코팅 원료 공급 탐색. ADNOC 다운스트림 다변화 전략 연계.' },
+    { FirstName: 'Amara', LastName: 'Coulibaly', Company: 'Groupe Mimosa', Email: 'a.coulibaly@mimosa-group.com', Title: 'Packaging Material Procurement', Status: 'Open - Not Contacted', LeadSource: 'Trade Show', Rating: 'Cold', Country: 'France', Phone: '+33-1-4700-3200', Description: '아프리카 코트디부아르 소비재 포장 문의. ECOTRIA CR/ECOZEN 서아프리카 소비재 패키징 탐색.' },
+    { FirstName: 'Ibrahim', LastName: 'Al-Shammari', Company: 'National Industries Group', Email: 'i.shammari@nigk.com', Title: 'Chemical Raw Material Director', Status: 'Working - Contacted', LeadSource: 'Partner Referral', Rating: 'Warm', Country: 'Saudi Arabia', Phone: '+966-11-476-7777', Description: 'SKYDMT/SKYCHDM 걸프 지역 화학 원료 공급 문의. NIG 그룹 폴리에스터 사업 원료 파트너십 탐색.' },
+    { FirstName: 'Zainab', LastName: 'Al-Rashidi', Company: 'Kuwait Finance House', Email: 'z.alrashidi@kfh.com', Title: 'Green Investment Procurement Lead', Status: 'Open - Not Contacted', LeadSource: 'LinkedIn', Rating: 'Cold', Country: 'United Arab Emirates', Phone: '+965-1803-333', Description: 'ECOTRIA CR/SKYGREEN 친환경 소재 ESG 투자 탐색. 중동 그린 파이낸스 연계 친환경 소재 초기 검토.' },
+    // 유럽 (5개)
+    { FirstName: 'Ivan', LastName: 'Novak', Company: 'MOL Group', Email: 'i.novak@mol.hu', Title: 'Petrochemical Raw Material Director', Status: 'Working - Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'Austria', Phone: '+36-1-464-1515', Description: 'SKYDMT/SKYCHDM 동유럽 석유화학 원료 공급 문의. MOL 폴리에스터 사업 원료 다변화 전략.' },
+    { FirstName: 'Kristina', LastName: 'Andersen', Company: 'Novozymes AS', Email: 'k.andersen@novozymes.com', Title: 'Bio-based Material Innovation Lead', Status: 'Open - Not Contacted', LeadSource: 'Conference', Rating: 'Warm', Country: 'Denmark', Phone: '+45-44-46-00-00', Description: 'ECOTRION 바이오 기반 모노머 협력 문의. Novozymes 효소 기반 바이오화학 원료 파트너십 탐색.' },
+    { FirstName: 'Jakub', LastName: 'Wieczorek', Company: 'LOTOS Group', Email: 'j.wieczorek@lotos.pl', Title: 'Chemical Feedstock Manager', Status: 'Working - Contacted', LeadSource: 'Web', Rating: 'Warm', Country: 'Poland', Phone: '+48-58-308-7111', Description: 'SKYDMT 폴란드 석유화학 원료 공급 탐색. LOTOS 그룹 폴리에스터 원료 사업 연계 검토.' },
+    { FirstName: 'Mattias', LastName: 'Holm', Company: 'Perstorp Group', Email: 'm.holm@perstorp.com', Title: 'Specialty Chemical Sourcing Director', Status: 'Open - Not Contacted', LeadSource: 'Trade Show', Rating: 'Hot', Country: 'Sweden', Phone: '+46-435-380-00', Description: 'SKYCHDA/SKYDMCD 스웨덴 특수화학 원료 공급 문의. Perstorp 폴리올·특수화학 포트폴리오 원료 다변화.' },
+    { FirstName: 'Lucia', LastName: 'Bianchi', Company: 'Versalis SpA', Email: 'l.bianchi@versalis.eni.com', Title: 'Polymer Raw Material Manager', Status: 'Working - Contacted', LeadSource: 'Conference', Rating: 'Hot', Country: 'Italy', Phone: '+39-02-5201-6111', Description: 'SKYDMT/SKYCHDM 이탈리아 화학 원료 공급 문의. ENI 그룹 Versalis 폴리에스터 원료 파트너십 탐색.' },
   ];
 
   let leadCount = 0;
@@ -562,8 +659,8 @@ async function seed() {
   }
   console.log(`  ✅ 총 Leads ${leadCount}건 생성 완료`);
 
-  // ── 5. Tasks (100개) ─────────────────────────────────────────────────────────
-  console.log('\n📋 Creating Tasks (100)...');
+  // ── 5. Tasks (120개) ─────────────────────────────────────────────────────────
+  console.log('\n📋 Creating Tasks (120)...');
   const taskDefs: Array<{Subject:string;Status:string;Priority:string;ActivityDate:string;Description:string}> = [
     // SKYGREEN 관련 (12건)
     { Subject: "SKYGREEN L'Oreal 화장품 용기 장기계약 협의 미팅", Status: 'Completed', Priority: 'High', ActivityDate: '2025-01-15', Description: "SKYGREEN 3년 장기 공급 계약 최종 협의. 담당자: Sophie Martin. 연간 320톤 단가 및 물량 확정." },
@@ -672,6 +769,36 @@ async function seed() {
     { Subject: 'SK케미칼 삼성전자 POSCO 국내 핵심 고객 연례 미팅', Status: 'Completed', Priority: 'High', ActivityDate: '2025-11-05', Description: 'SKYBON/SKYPURA 국내 핵심 고객 연례 전략 미팅. 담당자: 이준호, 윤철수. 2026년 계약 갱신 및 신제품 적용 논의.' },
     { Subject: 'SK케미칼 Braskem Alpek 남미 시장 탐색 출장', Status: 'Completed', Priority: 'Normal', ActivityDate: '2025-08-05', Description: '남미 시장 SKYDMT/ECOTRION 잠재 고객 탐색. Braskem(브라질) + Alpek(멕시코) 방문. 바이오 기반 원료 파트너십 초기 논의.' },
     { Subject: 'SK케미칼 중동 SABIC Tasnee 원료 비즈니스 출장', Status: 'Completed', Priority: 'High', ActivityDate: '2025-10-15', Description: '중동 원료 시장 개척 출장. SABIC+Tasnee 담당자 미팅. SKYDMT/SKYCHDM 중동 공급 가능성 협의 및 현지 수요 조사.' },
+    // ── 글로벌 균등 추가 Tasks (20개) ──
+    // Sun Pharma / Dr. Reddy's — 인도 신규 거래처
+    { Subject: 'Sun Pharmaceutical SKYDMCD 공급 계약 서명식', Status: 'Completed', Priority: 'High', ActivityDate: '2025-09-08', Description: 'SKYDMCD 고순도 제약 원료 인도 5년 장기 계약 체결. 담당자: Vikram Mehta. FDA 인증 공장 직납 조건 확정.' },
+    { Subject: "Dr. Reddy's SKYCHDM 원료 기술 샘플 평가", Status: 'Completed', Priority: 'Normal', ActivityDate: '2025-10-22', Description: "SKYCHDM 고순도 원료 샘플 평가. 담당자: Preethi Reddy. 인도 GMP 기준 충족 여부 확인, 합격 판정." },
+    // Amcal Group / CCL Industries — 호주·캐나다
+    { Subject: 'Amcal Group 호주 친환경 포장 규제 대응 기술 미팅', Status: 'Completed', Priority: 'High', ActivityDate: '2025-09-30', Description: 'ECOZEN BPA-free 호주 규정 적합성 확인. 담당자: Lachlan Murray. 호주 식품 안전 기준 전항목 통과 확인.' },
+    { Subject: 'CCL Industries 캐나다 친환경 라벨 소재 제안서 제출', Status: 'In Progress', Priority: 'High', ActivityDate: '2026-02-20', Description: 'SKYGREEN/ECOTRIA CR 특수 라벨 소재 제안서 제출. 담당자: Patricia Nguyen. 글로벌 22개국 공장 공급 조건 포함.' },
+    // Flex Ltd — 싱가포르
+    { Subject: 'Flex Ltd 싱가포르 SKYPURA 부품 소재 승인 획득', Status: 'Completed', Priority: 'High', ActivityDate: '2025-11-18', Description: 'SKYPURA 전자부품 소재 공식 승인. 담당자: Wei Tan. Flex 글로벌 승인 소재 리스트 등재 완료.' },
+    { Subject: 'Flex Ltd SKYTRA EV 충전 모듈 부품 Technical Review', Status: 'In Progress', Priority: 'Normal', ActivityDate: '2026-04-08', Description: 'SKYTRA EV 충전 모듈 내열 성능 평가. 담당자: Wei Tan. IEC 61851 충전기 기준 충족 여부 확인 중.' },
+    // WEG SA — 브라질
+    { Subject: 'WEG SA 브라질 SKYTRA 전동기 부품 납품 시작', Status: 'Completed', Priority: 'High', ActivityDate: '2025-07-23', Description: 'SKYTRA 전동기 인슐레이터 남미 양산 납품 첫 물량 출하. 담당자: Fernanda Costa. 물류·품질 기준 전항목 통과.' },
+    { Subject: 'WEG SA 재생에너지 케이블 SKYPEL 소재 기술 협의', Status: 'Not Started', Priority: 'Normal', ActivityDate: '2026-05-12', Description: 'SKYPEL 풍력·태양광 케이블 피복 소재 기술 협의. 담당자: Fernanda Costa. 브라질 재생에너지 확대 프로젝트 연계.' },
+    // Arçelik — 터키
+    { Subject: 'Arçelik 터키 SKYBON 강판 코팅 수지 품질 감사', Status: 'Completed', Priority: 'High', ActivityDate: '2025-06-10', Description: 'SKYBON 가전 강판 코팅 품질 현장 감사. 담당자: Murat Yilmaz. ECCA 코팅 기준 전항목 통과, 계약 확정.' },
+    { Subject: 'Arçelik EMEA 공급망 확대 전략 미팅 Istanbul', Status: 'In Progress', Priority: 'High', ActivityDate: '2026-03-18', Description: 'SKYBON 터키발 EMEA 공급망 확대 전략 협의. 담당자: Murat Yilmaz. 유럽·중동·아프리카 납품 체계 구축 로드맵 논의.' },
+    // Synthos SA — 폴란드
+    { Subject: 'Synthos SA 폴란드 SKYDMT 초도 물량 납품 확인', Status: 'Completed', Priority: 'High', ActivityDate: '2025-10-03', Description: 'SKYDMT 동유럽 첫 납품 품질 확인. 담당자: Agnieszka Kowalczyk. 폴란드 규격 전항목 통과, 정기 납품 체계 가동.' },
+    { Subject: 'Synthos SA SKYCHDM 코폴리에스터 원료 샘플 평가', Status: 'In Progress', Priority: 'Normal', ActivityDate: '2026-03-28', Description: 'SKYCHDM 동유럽 신규 공급 샘플 평가. 담당자: Agnieszka Kowalczyk. 코폴리에스터 물성 평가 진행 중.' },
+    // Nouryon AB — 스웨덴
+    { Subject: 'Nouryon AB 스웨덴 SKYCHDA 공급 계약 체결', Status: 'Completed', Priority: 'High', ActivityDate: '2025-09-18', Description: 'SKYCHDA 특수 코팅 원료 스웨덴 장기 계약 서명. 담당자: Bjorn Lindstrom. 북유럽 친환경 코팅 시장 독점 공급 확정.' },
+    { Subject: 'Nouryon AB SKYDMCD 아시아 공급 방안 협의', Status: 'Not Started', Priority: 'Normal', ActivityDate: '2026-06-22', Description: 'SKYDMCD 싱가포르·한국 Nouryon 공장 직납 협의. 담당자: Bjorn Lindstrom. 아시아 생산 기지 직납 물류 방안 검토 예정.' },
+    // Intercos Group — 이탈리아
+    { Subject: 'Intercos Group 이탈리아 ECOTRIA CLARO 계약 서명', Status: 'Completed', Priority: 'High', ActivityDate: '2025-11-23', Description: 'ECOTRIA CLARO 화장품 OEM 용기 이탈리아 공급 계약 서명. 담당자: Giulia Ferrari. 글로벌 럭셔리 브랜드 납품 체인 연계.' },
+    { Subject: 'Intercos Group SKYGREEN 프리미엄 용기 샘플 평가', Status: 'In Progress', Priority: 'Normal', ActivityDate: '2026-03-15', Description: 'SKYGREEN 럭셔리 화장품 용기 고투명 소재 평가. 담당자: Giulia Ferrari. 광택도·투명도 기준 이탈리아 럭셔리 브랜드 요구 충족 확인 중.' },
+    // 크로스 글로벌 활동
+    { Subject: 'SK케미칼 아시아태평양 신규 거래처 개발 출장 — 인도·싱가포르', Status: 'Completed', Priority: 'High', ActivityDate: '2025-11-10', Description: '인도(Sun Pharma, Dr. Reddy\'s) + 싱가포르(Flex, Wilmar) 신규 거래처 개발 출장. 4개사 미팅, 계약 2건 체결 성과.' },
+    { Subject: 'SK케미칼 유럽 신흥시장 개척 — 폴란드·스웨덴·이탈리아', Status: 'Completed', Priority: 'High', ActivityDate: '2025-12-01', Description: '동유럽·북유럽·남유럽 신규 거래처 개척 출장. Synthos(폴란드), Nouryon(스웨덴), Intercos(이탈리아) 방문. 계약 3건 체결.' },
+    { Subject: 'SK케미칼 남미·터키 신규 시장 전략 회의', Status: 'Completed', Priority: 'Normal', ActivityDate: '2026-01-20', Description: 'WEG SA(브라질), Arçelik(터키) 사업 현황 검토 및 2026년 확대 전략 수립. 재생에너지·가전 소재 공급 확대 로드맵 확정.' },
+    { Subject: 'SK케미칼 글로벌 10개 신규 거래처 온보딩 리뷰', Status: 'In Progress', Priority: 'High', ActivityDate: '2026-04-30', Description: '2025년 신규 체결 글로벌 10개 Account 온보딩 현황 리뷰. 공급 품질, 납기 준수율, 고객 만족도 종합 점검 진행 중.' },
   ];
 
   let taskCount = 0;
