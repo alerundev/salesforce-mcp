@@ -1,6 +1,10 @@
 /**
  * Seed 데이터 삭제 스크립트 (Salesforce 기본 샘플 데이터는 유지)
  * 실행: npm run cleanup
+ *
+ * 수정 내역:
+ * - Contact 삭제를 도메인 필터 대신 Account.Name 기반으로 변경
+ *   (기존: 도메인 목록에 toyota.com, tesla.com 누락으로 Contact 미삭제 → Account 삭제 실패)
  */
 import https from 'https';
 
@@ -53,6 +57,30 @@ async function deleteRecord(token: string, base: string, sobject: string, id: st
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
+// seed.ts에서 생성한 Account 이름 목록
+const ACCOUNT_NAMES = [
+  'Apple Inc.',
+  'NVIDIA Corporation',
+  'AMD Inc.',
+  'Qualcomm Technologies',
+  'Intel Corporation',
+  'Meta Platforms',
+  'Google LLC',
+  'Tesla Inc.',
+  'Sony Semiconductor',
+  'Toyota Motor Corporation',
+  'Toshiba Electronic Devices',
+  'MediaTek Inc.',
+  'ASUSTeK Computer',
+  'AU Optronics',
+  'Xiaomi Corporation',
+  'Alibaba Cloud',
+  'OPPO Electronics',
+  'Bosch Semiconductor',
+  'Infineon Technologies',
+  'STMicroelectronics',
+];
+
 // ── Cleanup ───────────────────────────────────────────────────────────────────
 
 async function cleanup() {
@@ -60,12 +88,18 @@ async function cleanup() {
   const { token, base } = await getToken();
   console.log('✅ Salesforce Connected:', base);
 
-  // ── 1. Tasks 삭제 (Subject에 제품명 포함) ──────────────────────────────────
+  // ── 1. Tasks 삭제 ──────────────────────────────────────────────────────────
   console.log('\n📋 Tasks 삭제 중...');
-  const products = ['HBM3E', 'DDR5', 'LPDDR5X', 'NAND', 'SSD', 'CIS', 'eUFS', 'LPDDR5', 'NVIDIA 파트너십', 'Apple 차세대', '글로벌 AI'];
+  const taskKeywords = [
+    '[HBM3E]', '[DDR5]', '[LPDDR5X]', '[NAND]', '[SSD]', '[CIS]', '[eUFS]', '[LPDDR5]',
+    'NVIDIA 파트너십', 'Apple 차세대', '글로벌 AI',
+  ];
   let taskCount = 0;
-  for (const p of products) {
-    const ids = await queryIds(token, base, `SELECT Id FROM Task WHERE Subject LIKE '%${p}%' LIMIT 200`);
+  for (const keyword of taskKeywords) {
+    const escaped = keyword.replace(/'/g, "\\'");
+    const ids = await queryIds(token, base,
+      `SELECT Id FROM Task WHERE Subject LIKE '%${escaped}%' LIMIT 200`
+    );
     for (const id of ids) {
       await deleteRecord(token, base, 'Task', id);
       taskCount++;
@@ -74,12 +108,15 @@ async function cleanup() {
   }
   console.log(`  ✅ Tasks ${taskCount}개 삭제 완료`);
 
-  // ── 2. Opportunities 삭제 (Name에 [제품명] 포함) ───────────────────────────
+  // ── 2. Opportunities 삭제 ──────────────────────────────────────────────────
   console.log('\n💰 Opportunities 삭제 중...');
   const oppProducts = ['[HBM3E]', '[DDR5]', '[LPDDR5X]', '[NAND]', '[SSD]', '[CIS]', '[eUFS]', '[LPDDR5]'];
   let oppCount = 0;
-  for (const p of oppProducts) {
-    const ids = await queryIds(token, base, `SELECT Id FROM Opportunity WHERE Name LIKE '%${p}%' LIMIT 200`);
+  for (const product of oppProducts) {
+    const escaped = product.replace(/'/g, "\\'");
+    const ids = await queryIds(token, base,
+      `SELECT Id FROM Opportunity WHERE Name LIKE '%${escaped}%' LIMIT 200`
+    );
     for (const id of ids) {
       await deleteRecord(token, base, 'Opportunity', id);
       oppCount++;
@@ -88,12 +125,16 @@ async function cleanup() {
   }
   console.log(`  ✅ Opportunities ${oppCount}개 삭제 완료`);
 
-  // ── 3. Contacts 삭제 (seed 이메일 도메인으로 필터) ─────────────────────────
+  // ── 3. Contacts 삭제 (Account.Name 기반 — 도메인 필터 대신 사용) ───────────
+  // 기존 도메인 필터 방식은 toyota.com, tesla.com 등이 누락되어
+  // Contact가 남아있는 채로 Account 삭제를 시도해 오류가 발생했음.
   console.log('\n👤 Contacts 삭제 중...');
-  const contactDomains = ['apple.com', 'nvidia.com', 'amd.com', 'qualcomm.com', 'intel.com', 'meta.com', 'google.com', 'tesla.com', 'sony.com', 'toyota.com', 'toshiba.com', 'mediatek.com', 'asus.com', 'auoptronics.com', 'xiaomi.com', 'alibaba.com', 'oppo.com', 'bosch.com', 'infineon.com', 'st.com'];
   let contactCount = 0;
-  for (const domain of contactDomains) {
-    const ids = await queryIds(token, base, `SELECT Id FROM Contact WHERE Email LIKE '%@${domain}' LIMIT 200`);
+  for (const name of ACCOUNT_NAMES) {
+    const escaped = name.replace(/'/g, "\\'");
+    const ids = await queryIds(token, base,
+      `SELECT Id FROM Contact WHERE Account.Name = '${escaped}' LIMIT 200`
+    );
     for (const id of ids) {
       await deleteRecord(token, base, 'Contact', id);
       contactCount++;
@@ -102,7 +143,7 @@ async function cleanup() {
   }
   console.log(`  ✅ Contacts ${contactCount}개 삭제 완료`);
 
-  // ── 4. Leads 삭제 (seed 이메일 주소로 필터) ────────────────────────────────
+  // ── 4. Leads 삭제 ─────────────────────────────────────────────────────────
   console.log('\n🎯 Leads 삭제 중...');
   const leadEmails = [
     'm.anderson@microsoft.com', 'j.taylor@aws.amazon.com', 'd.wilson@micron.com',
@@ -119,7 +160,9 @@ async function cleanup() {
   ];
   let leadCount = 0;
   for (const email of leadEmails) {
-    const ids = await queryIds(token, base, `SELECT Id FROM Lead WHERE Email = '${email}' LIMIT 10`);
+    const ids = await queryIds(token, base,
+      `SELECT Id FROM Lead WHERE Email = '${email}' LIMIT 10`
+    );
     for (const id of ids) {
       await deleteRecord(token, base, 'Lead', id);
       leadCount++;
@@ -128,20 +171,15 @@ async function cleanup() {
   }
   console.log(`  ✅ Leads ${leadCount}개 삭제 완료`);
 
-  // ── 5. Accounts 삭제 (seed 회사명으로 필터) ────────────────────────────────
+  // ── 5. Accounts 삭제 ──────────────────────────────────────────────────────
+  // Contact/Opportunity가 모두 삭제된 후에 실행해야 성공함
   console.log('\n📦 Accounts 삭제 중...');
-  const accountNames = [
-    'Apple Inc.', 'NVIDIA Corporation', 'AMD Inc.', 'Qualcomm Technologies',
-    'Intel Corporation', 'Meta Platforms', 'Google LLC', 'Tesla Inc.',
-    'Sony Semiconductor', 'Toyota Motor Corporation', 'Toshiba Electronic Devices',
-    'MediaTek Inc.', 'ASUSTeK Computer', 'AU Optronics', 'Xiaomi Corporation',
-    'Alibaba Cloud', 'OPPO Electronics', 'Bosch Semiconductor',
-    'Infineon Technologies', 'STMicroelectronics',
-  ];
   let accountCount = 0;
-  for (const name of accountNames) {
-    const escapedName = name.replace(/'/g, "\\'");
-    const ids = await queryIds(token, base, `SELECT Id FROM Account WHERE Name = '${escapedName}' LIMIT 10`);
+  for (const name of ACCOUNT_NAMES) {
+    const escaped = name.replace(/'/g, "\\'");
+    const ids = await queryIds(token, base,
+      `SELECT Id FROM Account WHERE Name = '${escaped}' LIMIT 10`
+    );
     for (const id of ids) {
       await deleteRecord(token, base, 'Account', id);
       accountCount++;
@@ -150,8 +188,15 @@ async function cleanup() {
   }
   console.log(`  ✅ Accounts ${accountCount}개 삭제 완료`);
 
+  // ── Summary ────────────────────────────────────────────────────────────────
   console.log('\n🎉 Seed 데이터 삭제 완료!');
-  console.log('   Salesforce 기본 샘플 데이터는 유지됩니다.');
+  console.log(`   Task        : ${taskCount}개`);
+  console.log(`   Opportunity : ${oppCount}개`);
+  console.log(`   Contact     : ${contactCount}개`);
+  console.log(`   Lead        : ${leadCount}개`);
+  console.log(`   Account     : ${accountCount}개`);
+  console.log(`   합계        : ${taskCount + oppCount + contactCount + leadCount + accountCount}개`);
+  console.log('\n   Salesforce 기본 샘플 데이터는 유지됩니다.');
   console.log('   이제 npm run seed 를 실행하세요.');
 }
 
